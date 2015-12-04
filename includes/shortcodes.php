@@ -26,10 +26,12 @@ function ninja_forms_modal_form_shortcode( $atts ){
         if ( !isset ( $ninja_forms_modal ) ) {
             $ninja_forms_modal = array();
         }
-        $ninja_forms_modal[] = $id;
-        add_action( 'ninja_forms_display_js', 'ninja_forms_modal_enqueue_scripts' );
-        add_action( 'wp_footer', 'ninja_forms_modal_output_modal' );
-        //$modal = ninja_forms_modal_get_modal( $id );
+        if (!in_array($id, $ninja_forms_modal)){
+            $ninja_forms_modal[] = $id;
+            add_action( 'ninja_forms_display_js', 'ninja_forms_modal_enqueue_scripts' );
+            add_action( 'wp_footer', 'ninja_forms_modal_output_modal' );
+            //$modal = ninja_forms_modal_get_modal( $id );
+        }
     } else {
         return;
     }
